@@ -15,14 +15,14 @@ class atm
 		int amount = Integer.parseInt(money), note100=0, note50=0, note20=0, note10=0;
 		int max100=10, max50=10, max20=10, max10=10;
 		
-		
+		int total=amount;
 		
 		if (amount<10)
 		{
 			System.out.println("\n\nThe entered value is invalid");
+			return;
 		}
-		else
-			System.out.println("\n\nYou gonna withdraw RM "+amount+" from your account");
+			
 		
 		
 		if (amount>=100)
@@ -73,6 +73,16 @@ class atm
 			}
 		}
 		
-		System.out.println("\n\nNote $100\t= "+note100+"\nNote $50\t= "+note50+"\nNote $20\t= "+note20+"\nNote $10\t= "+note10);
+		if (amount!=0)
+		{
+			System.out.println("Error!, Please input amount in multiple of 10");
+			return;
+		}
+		else
+		{
+			System.out.println("\n\nYou gonna withdraw RM "+total+" from your account");
+			System.out.println("\n\nNote $100\t= "+note100+"\nNote $50\t= "+note50+"\nNote $20\t= "+note20+"\nNote $10\t= "+note10);
+		}
+		
 	}
 }
