@@ -1,5 +1,5 @@
 //by HafizJef.
-//test push something
+
 
 import java.io.*;
 class atm
