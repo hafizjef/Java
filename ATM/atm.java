@@ -1,6 +1,4 @@
-//by HafizJef.
-
-
+//by HafizJef
 import java.io.*;
 class atm
 {
@@ -16,7 +14,7 @@ class atm
 		
 			
 		int loop=0;
-		while (loop<5)
+		while (loop==0)
 		{
 			
 			System.out.print("\n\n+Please input amount of money that you want to withdraw(Min. RM 10) : ");
@@ -33,8 +31,8 @@ class atm
 			}
 			else if (amount>1500)
 			{
-				System.out.println("\n\nYou have excedeed the maximum amount");
-				return;
+				System.out.println("\n\nThe maximum amount to per withdrawal is RM1500");
+				continue;
 			}
 
 
@@ -97,9 +95,23 @@ class atm
 			}
 			else
 			{
-				System.out.println("\n\nYou gonna withdraw RM "+total+" from your account");
-				System.out.println("\n\nNote $100\t= "+note100+"\nNote $50\t= "+note50+"\nNote $20\t= "+note20+"\nNote $10\t= "+note10);
-				loop=loop+1;
+				System.out.println("\n\n\t=====================\n"+"\t| Note $100\t= "+note100+" | "+"\n\t| Note $50\t= "+note50+" | "+"\n\t| Note $20\t= "+note20+" | "+"\n\t| Note $10\t= "+note10+" | ");
+				System.out.println("\t=====================\n"+"\n\t  Total\t\t= "+total);
+
+
+				System.out.print("\n\nDo you want to make another transaction?[Y/N] : ");
+				String userMenu = getinput.readLine();
+
+				if ((userMenu.equals("y"))||(userMenu.equals("Y")))
+				{
+					loop=0;
+				}
+				else
+				{
+					System.out.println("Thanks for using our service");
+					loop=1;
+				}
+
 			}
 		
 		}
