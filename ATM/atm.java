@@ -45,7 +45,7 @@ class atm
 				{
 					amount=(amount%100)+(100*(note100-max100));
 					note100=max100;
-					System.out.println(amount);
+					//System.out.println(amount);
 				}
 				max100=max100-note100;
 			}
@@ -57,7 +57,7 @@ class atm
 				{
 					amount=(amount%50)+(50*(note50-max50));
 					note50=max50;
-					System.out.println(amount);
+					//System.out.println(amount);
 				}
 				max50=max50-note50;
 			}
@@ -69,7 +69,7 @@ class atm
 				{
 					amount=(amount%20)+(20*(note20-max20));
 					note20=max20;
-					System.out.println(amount);
+					//System.out.println(amount);
 				}
 				max20=max20-note20;
 			}
@@ -81,8 +81,8 @@ class atm
 				{
 					amount=(amount%10)+(10*(note10-max10));
 					note10=max10;
-					System.out.println(amount);
-					System.out.println("\n\nSorry, our machine is out of service");
+					//System.out.println(amount);
+					System.out.println("Sorry, our machine is out of service");
 					System.exit(0);
 				}
 				max10=max10-note10;
