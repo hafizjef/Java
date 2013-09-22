@@ -16,36 +16,27 @@ public class phonebook
 
 
 	public void showMenu(){
-		System.out.print("\n1. Update Data");
+		System.out.print("\n\n---------------\n1. Update Data");
 		System.out.print("\n2. View Data");
 		System.out.print("\n3. Delete Data");
 		System.out.print("\n4. Find Data");
-		System.out.print("\n5. Save changes to file\n");
+		System.out.print("\n5. Exit\n---------------\n");
 
 	}
-	public void doTell(int option){
-		if (option==1){
-			printM("\nSelected option 1\n");
-		}
-		if (option==2){
-			printM("\nSelected option 2\n");
-		}
-	}
-
-	public void doWork(int option)throws IOException{
+	public int doWork(int option)throws IOException{
 		switch (option){
-			case 1 :	doTell(option);
-						printM("\nHow many user you want to input?\n");
+			case 1 :	printM("\nHow many user you want to input?\n");
 						insertData(Integer.parseInt(getInput()));
 						break;
 
-			case 2 : 	doTell(option);
-						createArr();
+			case 2 : 	createArr();
 						showData();
 						break;
-			case 3 :	doTell(option);
-										
+			case 5 :	return 5;
+			default :	printM("\nERROR! Invalid input");
+						return 0;	
 		}
+		return 0;
 	}
 
 
@@ -126,12 +117,29 @@ public class phonebook
 
 	public static void main(String[] args)throws IOException
 	{
+		{
+			System.out.print("\nWelcome to phonebookSoft, please insert your option : ");
+			
+			
+			String state = "y";
+			while (state.equals("y"))
+			{
+				try
+				{
+					phonebook func = new phonebook();
+					func.showMenu();
+					if(func.doWork(Integer.parseInt(func.getInput()))==5){
+						return;
+					}
+				}
+					catch(NumberFormatException wtf){
+					System.out.print("\nERROR! : Please input selection!");
+				}
 
+			}
+			;
+		}
 		//main menu;
-		System.out.print("\nWelcome to phonebookSoft, please insert your option : ");
-		phonebook func = new phonebook();
-		func.showMenu();
-
-		func.doWork(Integer.parseInt(func.getInput()));
+		
 	}
 }
