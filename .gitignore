@@ -216,4 +216,5 @@ pip-log.txt
 
 #Java Class
 **/*.class
+**/*.data
 "Rakefile" 
