@@ -3,6 +3,7 @@ import java.io.*;
 public class saveNumber{
 	String name, telNo;
 	String[] nameData, telData;
+	int size;
 
 	/*public saveNumber(String telNo)throws IOException
 	{
@@ -10,22 +11,23 @@ public class saveNumber{
 		writer.println(telNo);
 		writer.close();
 	}
-	
+	*/
 
 	//save phoneNumber to a txt file
-	void saveNumber(String telNo)throws IOException
+	void saveData(int loc)throws IOException
 	{
-		PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("phonebook.txt", true)));
-		writer.println(telNo);
+		PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("phonebook.data", true)));
+		writer.println(nameData[loc]+","+telData[loc]);
 		writer.close();
 	}
-	*/
+	
 	
 	public saveNumber(int arrSize){
 		nameData = new String[arrSize];
 		telData = new String[arrSize];
+		size = arrSize;
 	}
-	public void setArrayElement(int loc, String name, String telNo){
+	public void setArrayElement(int loc, String name, String telNo)throws IOException{
 		nameData[loc] = name;
 		telData[loc] = telNo;
 	}
@@ -43,6 +45,11 @@ public class saveNumber{
 				System.out.println("Found on index : "+x+" "+nameData[x]+" : "+telData[x]+" ");
 			}
 		}
+	}
+
+	public int showSize(){
+		int showSize = size;
+		return showSize;
 	}
 	
 }
