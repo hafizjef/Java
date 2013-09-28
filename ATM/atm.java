@@ -65,7 +65,7 @@ class atm
 			{
 				note20=amount/20;
 				amount=amount%20;
-				if (note20>max100)
+				if (note20>max20)
 				{
 					amount=(amount%20)+(20*(note20-max20));
 					note20=max20;
