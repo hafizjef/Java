@@ -16,6 +16,7 @@ class atm
 		int loop=0;
 		while (loop==0)
 		{
+			note100=0; note50=0; note20=0; note10=0;
 			
 			System.out.print("\n\n+Please input amount of money that you want to withdraw(Min. RM 10) : ");
 		
@@ -102,7 +103,7 @@ class atm
 				System.out.print("\n\nDo you want to make another transaction?[Y/N] : ");
 				String userMenu = getinput.readLine();
 
-				if ((userMenu.equals("y"))||(userMenu.equals("Y")))
+				if ((userMenu.equalsIgnoreCase("Y")))
 				{
 					loop=0;
 				}
