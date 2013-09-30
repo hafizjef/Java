@@ -6,7 +6,7 @@ public class Records {
 	String[] nameData=new String[100];
 	String[] telData=new String[100];
 	int size=100;
-	
+	int found=0;
 	
 	public void saveToFile(int loc)throws IOException
 	{
@@ -28,11 +28,21 @@ public class Records {
 		return nameData[loc];
 	}
 	
-	public int findByName(String name){
+	public int findByName(String name, Menu menu){
 		startUp();
+		String find=name.toLowerCase();
 		
-		
-		return 1;
+		try{
+			for (int x=0; x<(menu.count()); x++){
+					if (find.contains(menu.getName(x).toLowerCase())==true){
+						System.out.println(menu.getName(x)+" : "+menu.getPhoneNumber(x));
+						this.found=1;
+					}
+				}	
+			}catch(IOException e){
+			e.printStackTrace();
+			}
+			return found;
 	}
 	
 	public int findByNum(String num){

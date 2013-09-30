@@ -78,47 +78,21 @@ public class yellowpaper {
 			}
 			
 			else if(choice==3){
-				System.out.print("Find By : \n1. Name\n2. Number");
+				System.out.println("\n1. Find By name\n2. Find By Number");
+				System.out.print("> ");
 				int fs=in.nextInt();
 				
-				
 				if (fs==1){
-					System.out.print("Input the Name : ");
-					String find=in.next().toLowerCase();
-					try{
-						for (int x=0; x<menu.count(); x++){
-							if (find.contains(menu.getName(x).toLowerCase())==true){
-								System.out.println(menu.getName(x)+" : "+menu.getPhoneNumber(x));
-							}
-							else{
-								System.out.println("No records found");
-							}
-						}	
-					}catch(IOException e){
-						e.printStackTrace();
-					}
-				}
-				
-				if (fs==2){
-					System.out.print("Input the Number : ");
-					String find=in.next();
-					int found = 0;
-					try{
-						for (int x=0; x<menu.count(); x++){
-							if (find.equals(menu.getName(x))){
-								System.out.println(menu.getName(x)+" : "+menu.getPhoneNumber(x));
-								found=1;
-							}
-							
-						}	
-					}catch(IOException e){
-						e.printStackTrace();
+					System.out.print("Input name to find : ");
+					if(menu.findByName(in.next(), menu)==0){
+						System.out.println("No records found");
+						continue;
 					}
 				}
 				continue;
 			}
-			
-			
+				
+						
 			else if(choice==4){
 				
 				continue;
