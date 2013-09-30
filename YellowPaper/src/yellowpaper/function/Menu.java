@@ -29,10 +29,10 @@ public class Menu extends Records{
 	
 	public void showOption(){
 		String[] n = new String[5];
-		n[0]="1.Update data";
-		n[1]="2.View Data";
-		n[2]="3.Find Data";
-		n[3]="4.Delete Data";
+		n[0]="1.Update Records";
+		n[1]="2.View Records";
+		n[2]="3.Find Records";
+		n[3]="4.Delete Records";
 		n[4]="5.Exit";
 		
 		System.out.println("======================================");

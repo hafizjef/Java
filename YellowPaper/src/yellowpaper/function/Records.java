@@ -45,8 +45,20 @@ public class Records {
 			return found;
 	}
 	
-	public int findByNum(String num){
-		return 1;
+	public int findByNum(String num, Menu menu){
+		startUp();
+		String find=num;
+		try{
+			for (int x=0; x<(menu.count()); x++){
+					if (menu.getPhoneNumber(x).equals(find)==true){
+						System.out.println(menu.getName(x)+" : "+menu.getPhoneNumber(x));
+						this.found=1;
+					}
+				}	
+			}catch(IOException e){
+			e.printStackTrace();
+			}
+			return found;
 	}
 	
 	public void startUp(){

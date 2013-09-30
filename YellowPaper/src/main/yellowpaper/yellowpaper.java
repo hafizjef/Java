@@ -89,6 +89,14 @@ public class yellowpaper {
 						continue;
 					}
 				}
+				else if (fs==2){
+					System.out.print("Input number to find : ");
+					if(menu.findByNum(in.next(), menu)==0){
+						System.out.println("No records found");
+						continue;
+					}
+				}
+				
 				continue;
 			}
 				
