@@ -7,17 +7,14 @@ public class Practical {
 		
 		BufferedReader userin = new BufferedReader(new InputStreamReader(System.in));
 		
-		System.out.print("Enter Integer 1 : ");
-		try{
-			input1=Integer.parseInt(userin.readLine());
-			}catch (NumberFormatException e){
-			System.out.println("Invalid input, not integer number\nExit System\nThank You...");
-			return;
-		}
 		
-		System.out.print("Enter Integer 2 : ");
 		try{
+			System.out.print("Enter Integer 1 : ");
+			input1=Integer.parseInt(userin.readLine());
+			
+			System.out.print("Enter Integer 2 : ");
 			input2=Integer.parseInt(userin.readLine());
+			
 			}catch (NumberFormatException e){
 			System.out.println("Invalid input, not integer number\nExit System\nThank You...");
 			return;
