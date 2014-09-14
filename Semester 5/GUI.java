@@ -28,7 +28,7 @@ public class Lab3Exe extends JFrame implements ActionListener
 		sendBtn=new JButton("SEND");
 
 		sendBtn.addActionListener(this);
-		c.add(displayTA);
+		//c.add(displayTA);
 		c.add(scroll);
 		c.add(msgTA);
 		c.add(sendBtn);
