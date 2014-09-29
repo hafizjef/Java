@@ -4,14 +4,15 @@ import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 
-public class Lab3Exe extends JFrame implements ActionListener
+class Lab3Exe extends JFrame implements ActionListener
 {
-	private static JTextArea displayTA, msgTA;
+	private static JTextArea displayTA;
+	private static JTextField msgTA, ipTF;
 	private JButton sendBtn;
 
 	public Lab3Exe()
 	{
-		super("Chatting Box");
+		super("PUO Quick Message");
 
 		Container c=getContentPane();
 		c.setLayout(new FlowLayout());
@@ -24,18 +25,31 @@ public class Lab3Exe extends JFrame implements ActionListener
 		JScrollPane scroll = new JScrollPane (displayTA);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		msgTA=new JTextArea(2,24);
+		msgTA=new JTextField("", 24);
+		//msgTA.setLineWrap(true);
+		msgTA.setEditable(true);
+
+		ipTF=new JTextField("192.168.1.1", 31);
+
 		sendBtn=new JButton("SEND");
+
 
 		sendBtn.addActionListener(this);
 		//c.add(displayTA);
+		c.add(ipTF);
 		c.add(scroll);
 		c.add(msgTA);
 		c.add(sendBtn);
 
-		setSize(380,330);
+		//pack();
+		setSize(380,350);
 		setVisible(true);
+		
 	}
+
+	public static void focusTextField() {
+        	msgTA.requestFocusInWindow();
+    }
 
     public void actionPerformed(ActionEvent e)
 
@@ -43,9 +57,10 @@ public class Lab3Exe extends JFrame implements ActionListener
     	if (e.getSource()==sendBtn);
     	//code goes here
     	String msg = msgTA.getText();
+    	String ipAdd = ipTF.getText();
     	try{
-    		sendMsg(msg);
-    		displayTA.append("Me : " + msg+"\n");
+    		sendMsg(msg, ipAdd);
+    		displayTA.append("[Me] : " + msg+"\n");
     	}
     	catch (Exception ex){
 
@@ -54,9 +69,9 @@ public class Lab3Exe extends JFrame implements ActionListener
 
     }
 
-    public static void sendMsg(String msg)throws Exception{
+    public static void sendMsg(String msg, String ipAdd)throws Exception{
     		DatagramSocket ds = new DatagramSocket (2021);
-			InetAddress inet = InetAddress.getByName("10.48.44.116");
+			InetAddress inet = InetAddress.getByName(ipAdd);
 			//String msg = msgTA.getText();
 			byte [] buf = msg.getBytes();
 			DatagramPacket dp = new DatagramPacket (buf, buf.length, inet, 2020);
@@ -68,6 +83,7 @@ public class Lab3Exe extends JFrame implements ActionListener
 	{
 		Lab3Exe ii=new Lab3Exe();
 		listenThread();
+		Lab3Exe.focusTextField();
 		ii.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
