@@ -4,45 +4,44 @@ import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 
-class Lab3Exe extends JFrame implements ActionListener
+class quikchat extends JFrame implements ActionListener
 {
 	private static JTextArea displayTA;
 	private static JTextField msgTA, ipTF;
 	private JButton sendBtn;
 
-	public Lab3Exe()
+	public quikchat()
 	{
 		super("PUO Quick Message");
 
 		Container c=getContentPane();
 		c.setLayout(new FlowLayout());
 
+		Font font = new Font("Verdana", Font.PLAIN, 11);
 
-		displayTA=new JTextArea(15,30);
+		displayTA=new JTextArea(14,29);
 		displayTA.setEditable(false);
+		displayTA.setFont(font);
 		displayTA.setLineWrap(true);
 
 		JScrollPane scroll = new JScrollPane (displayTA);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		msgTA=new JTextField("", 24);
-		//msgTA.setLineWrap(true);
+		msgTA=new JTextField("", 34);
 		msgTA.setEditable(true);
 
-		ipTF=new JTextField("192.168.1.1", 31);
+		ipTF=new JTextField("192.168.1.1", 42);
 
 		sendBtn=new JButton("SEND");
 
 
 		sendBtn.addActionListener(this);
-		//c.add(displayTA);
 		c.add(ipTF);
 		c.add(scroll);
 		c.add(msgTA);
 		c.add(sendBtn);
 
-		//pack();
-		setSize(380,350);
+		setSize(375,320);
 		setVisible(true);
 		
 	}
@@ -51,41 +50,40 @@ class Lab3Exe extends JFrame implements ActionListener
         	msgTA.requestFocusInWindow();
     }
 
-    public void actionPerformed(ActionEvent e)
-
-    {
+    public void actionPerformed(ActionEvent e){
     	if (e.getSource()==sendBtn);
-    	//code goes here
     	String msg = msgTA.getText();
     	String ipAdd = ipTF.getText();
     	try{
     		sendMsg(msg, ipAdd);
     		displayTA.append("[Me] : " + msg+"\n");
+    		msgTA.setText("");
     	}
     	catch (Exception ex){
 
     	}
-
-
     }
 
-    public static void sendMsg(String msg, String ipAdd)throws Exception{
+	public static void main(String args[]){
+		try{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		quikchat ii=new quikchat();
+		listenThread();
+		quikchat.focusTextField();
+		ii.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public static void sendMsg(String msg, String ipAdd)throws Exception{
     		DatagramSocket ds = new DatagramSocket (2021);
 			InetAddress inet = InetAddress.getByName(ipAdd);
-			//String msg = msgTA.getText();
 			byte [] buf = msg.getBytes();
 			DatagramPacket dp = new DatagramPacket (buf, buf.length, inet, 2020);
 			ds.send(dp);
 			ds.close();
     }
-
-	public static void main(String args[])
-	{
-		Lab3Exe ii=new Lab3Exe();
-		listenThread();
-		Lab3Exe.focusTextField();
-		ii.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
 
 	public static void receiveMsg()throws Exception{
 		DatagramSocket ds = new DatagramSocket (2020);
