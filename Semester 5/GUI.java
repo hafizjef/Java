@@ -32,7 +32,7 @@ class quikchat extends JFrame implements ActionListener
 
 		ipTF=new JTextField("192.168.1.1", 42);
 
-		sendBtn=new JButton("SEND");
+		sendBtn=new JButton("Send");
 
 
 		sendBtn.addActionListener(this);
