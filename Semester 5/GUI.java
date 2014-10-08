@@ -1,31 +1,31 @@
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.io.*;
-import java.net.*;
+import java.awt.*; //Import Java Abstract Window Toolkit
+import javax.swing.*; //Java Swing toolkit
+import java.awt.event.*; //Java AWT Event
+import java.io.*; //Java Input Output Library
+import java.net.*; //Java Networking
 
 class quikchat extends JFrame implements ActionListener
 {
-	private static JTextArea displayTA;
-	private static JTextField msgTA, ipTF;
-	private JButton sendBtn;
+	private static JTextArea displayTA; //Initialize Java TextArea; displayTA
+	private static JTextField msgTA, ipTF; //Initialize Java TextField; msgTA, ipTF 
+	private JButton sendBtn; //Init JButton
 
 	public quikchat()
 	{
-		super("PUO Quick Message");
+		super("PUO Quick Message"); //Setting windows Title
 
 		Container c=getContentPane();
 		c.setLayout(new FlowLayout());
 
 		Font font = new Font("Verdana", Font.PLAIN, 11);
 
-		displayTA=new JTextArea(14,29);
+		displayTA=new JTextArea(14,29); 
 		displayTA.setEditable(false);
 		displayTA.setFont(font);
 		displayTA.setLineWrap(true);
 
 		JScrollPane scroll = new JScrollPane (displayTA);
-		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS); //Setting vertical scrollbar to always
 
 		msgTA=new JTextField("", 34);
 		msgTA.setEditable(true);
@@ -34,9 +34,9 @@ class quikchat extends JFrame implements ActionListener
 
 		sendBtn=new JButton("Send");
 
-
+		//Adding components to the main layout
 		sendBtn.addActionListener(this);
-		c.add(ipTF);
+		c.add(ipTF); 
 		c.add(scroll);
 		c.add(msgTA);
 		c.add(sendBtn);
@@ -47,7 +47,7 @@ class quikchat extends JFrame implements ActionListener
 	}
 
 	public static void focusTextField() {
-        	msgTA.requestFocusInWindow();
+        	msgTA.requestFocusInWindow(); //Getting the focus to msgTA right after program excution
     }
 
     public void actionPerformed(ActionEvent e){
