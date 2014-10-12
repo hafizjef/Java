@@ -12,7 +12,7 @@ class quikchat extends JFrame implements ActionListener
 
 	public quikchat()
 	{
-		super("PUO Quick Message"); //Setting windows Title
+		super("MulticastSocket"); //Setting windows Title
 
 		Container c=getContentPane();
 		c.setLayout(new FlowLayout());
@@ -30,7 +30,7 @@ class quikchat extends JFrame implements ActionListener
 		msgTA=new JTextField("", 34);
 		msgTA.setEditable(true);
 
-		ipTF=new JTextField("192.168.1.1", 42);
+		ipTF=new JTextField("225.5.5.5", 42);
 
 		sendBtn=new JButton("Send");
 
@@ -55,12 +55,12 @@ class quikchat extends JFrame implements ActionListener
     	String msg = msgTA.getText();
     	String ipAdd = ipTF.getText();
     	try{
-    		sendGroup(msg, "225.5.5.5");
+    		sendGroup(msg, ipAdd);
     		displayTA.append("[Me] : " + msg+"\n");
     		msgTA.setText("");
     	}
     	catch (Exception ex){
-
+    		System.out.println(ex);
     	}
     }
 
@@ -86,7 +86,7 @@ class quikchat extends JFrame implements ActionListener
  //    }
 
     public static void sendGroup(String msg, String ipAdd)throws Exception{
-    	MulticastSocket ms = new MulticastSocket(2020);
+    	MulticastSocket ms = new MulticastSocket(2021);
     	InetAddress inet = InetAddress.getByName(ipAdd); //Multicast IP Here
     	ms.joinGroup(inet);
 
