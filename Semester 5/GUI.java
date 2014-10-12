@@ -55,7 +55,7 @@ class quikchat extends JFrame implements ActionListener
     	String msg = msgTA.getText();
     	String ipAdd = ipTF.getText();
     	try{
-    		sendMsg(msg, ipAdd);
+    		sendGroup(msg, "225.5.5.5");
     		displayTA.append("[Me] : " + msg+"\n");
     		msgTA.setText("");
     	}
@@ -76,13 +76,23 @@ class quikchat extends JFrame implements ActionListener
 		ii.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public static void sendMsg(String msg, String ipAdd)throws Exception{
-    		DatagramSocket ds = new DatagramSocket (2021);
-			InetAddress inet = InetAddress.getByName(ipAdd);
-			byte [] buf = msg.getBytes();
-			DatagramPacket dp = new DatagramPacket (buf, buf.length, inet, 2020);
-			ds.send(dp);
-			ds.close();
+	// public static void sendMsg(String msg, String ipAdd)throws Exception{
+ //    		DatagramSocket ds = new DatagramSocket (2021);
+	// 		InetAddress inet = InetAddress.getByName(ipAdd);
+	// 		byte [] buf = msg.getBytes();
+	// 		DatagramPacket dp = new DatagramPacket (buf, buf.length, inet, 2020);
+	// 		ds.send(dp);
+	// 		ds.close();
+ //    }
+
+    public static void sendGroup(String msg, String ipAdd)throws Exception{
+    	MulticastSocket ms = new MulticastSocket(2020);
+    	InetAddress inet = InetAddress.getByName(ipAdd); //Multicast IP Here
+    	ms.joinGroup(inet);
+
+    	byte [] buf = msg.getBytes();
+    	DatagramPacket dp = new DatagramPacket (buf, buf.length, inet, 2020);
+    	ms.send(dp);
     }
 
 	public static void receiveMsg()throws Exception{
