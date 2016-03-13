@@ -1,12 +1,5 @@
-## DNS@PUO Java source code Repo ##
-----------
-Maintained by [@HafizJef][1]
+# BITP3113 - Object Oriented Programming (Java)
 
-
-
-
-
-
-
-
-  [1]: http://twitter.com/hafizjef
+| Credit | Lab | Lecture |
+|:---:|:---:|:---:|
+|3|2|2|
