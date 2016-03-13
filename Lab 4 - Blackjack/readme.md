@@ -1,3 +1,3 @@
 ## Todo:
-[] - Calculate total points
-[] - Print out winner
+- [ ] Calculate total points
+- [ ] Print out winner
