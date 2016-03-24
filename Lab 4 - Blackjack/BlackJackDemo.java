@@ -18,40 +18,85 @@ public class BlackJackDemo {
 		Card card1 = new Card('H', "2");
 		Card card2 = new Card('S', "9");
 		Card card3 = new Card('C', "3");
-
-		System.out.print(card1.getFaceValue() + "-");
-		System.out.println(card1.getSymbol());
-		System.out.print(card2.getFaceValue() + "-");
-		System.out.println(card2.getSymbol());
-		System.out.print(card3.getFaceValue() + "-");
-		System.out.println(card3.getSymbol());
-		System.out.println();
+		Card card4 = new Card('D', "2");
+		Card card5 = new Card('S', "King");
+		Card card6 = new Card('S', "6");
+		Card card7 = new Card('C', "8");
+		Card card8 = new Card('C', "Queen");
+		Card card9 = new Card('D', "4");
 
 		// 1st player initialization
-		Player p1 = new Player("John Cena");
+		Player[] players = new Player[3];
+		Player p1 = new Player("Emma");
+
 		
-		p1.hit(card2);
-		p1.hit(card3);
 		p1.hit(card1);
+		p1.calculateTotalPoint(card1);
+		p1.hit(card2);
+		p1.calculateTotalPoint(card2);
+		p1.hit(card3);
+		p1.calculateTotalPoint(card3);
 
-		System.out.format("Player %d: %s (Total Point: %d)%n", p1.getPlayerPos(), p1.getName(), p1.getTotalPoint());
-		p1.displayCardInHand();
-		System.out.println("\n");
-
+	
 		// initialize more player
-		Player p2 = new Player("Emma Maembong");
-		Player p3 = new Player("John Terry");
-		Player p4 = new Player("Roberto Carlos");
-		Player p5 = new Player("Johnny");
+		Player p2 = new Player("Ali");
+		Player p3 = new Player("Abu");
+
 		
-		// add card to player 2 (Emma Maembong)
-		p2.hit(card1);
-		p2.hit(card3);
-		p2.hit(card1);
+		// add card to player 2 (Ali)
+		p2.hit(card4);
+		p2.calculateTotalPoint(card4);
+		p2.hit(card5);
+		p2.calculateTotalPoint(card5);
+		p2.hit(card6);
+		p2.calculateTotalPoint(card6);
 
-		System.out.format("Player %d: %s (Total Point: %d)%n", p2.getPlayerPos(), p2.getName(), p2.getTotalPoint());
-		p2.displayCardInHand();
 
-		System.out.println("\n\nTotal player: " + Player.playerCount);
-	}
+		p3.hit(card7);
+		p3.calculateTotalPoint(card7);
+		p3.hit(card8);
+		p3.calculateTotalPoint(card8);
+		p3.hit(card9);
+		p3.calculateTotalPoint(card9);
+	
+		// Put player in array
+		players[0] = p1;
+		players[1] = p2;
+		players[2] = p3;
+
+		// Print details of player
+		for(int index = 0; index < players.length; index++) {  
+			// Put current player into temporary object
+			Player currentPlayer = players[index];
+			int totalPoint = currentPlayer.getTotalPoint();
+
+
+			// Display details of player
+			System.out.print("Player " + (index + 1) + " : ");
+			System.out.print(currentPlayer.getName());
+			System.out.println("\t(Total Point : " + totalPoint + ")");
+			currentPlayer.displayCardInHand();
+
+		}
+
+		for (int index = 0; index < players.length; index++) {
+		
+			/* Eliminate players with more than 21 points */
+			  
+			if (players[index].getTotalPoint() > 21) {
+				
+				players[index] = null;
+				continue;
+			}
+			
+			if ((21 - players[index].getTotalPoint()) <= 3) {
+			
+				System.out.print("\n\n***Winner is Player " + (index+1));
+				System.out.println(" : " +  players[index].getName());
+				players[0] = players[index];
+				continue;
+			}
+		}
+
+	}	
 }

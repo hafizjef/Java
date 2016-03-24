@@ -31,15 +31,15 @@ class Card{
 	}
 
 	int getRealValue(){
-		if (faceValue.toLowerCase().equals("ace")) {
+		if (faceValue.equalsIgnoreCase("ace")) {
 			return 1;
-		} else if (faceValue.toLowerCase().equals("jack")) {
+		} else if (faceValue.equalsIgnoreCase("jack")) {
 		 	return 10;
-		} else if (faceValue.toLowerCase().equals("queen")) {
+		} else if (faceValue.equalsIgnoreCase("queen")) {
 		 	return 10; 
-		} else if (faceValue.toLowerCase().equals("king")) {
+		} else if (faceValue.equalsIgnoreCase("king")) {
 		 	return 10;
-		} else if (faceValue.toLowerCase().equals("joker")) {
+		} else if (faceValue.equalsIgnoreCase("joker")) {
 			return 10; 
 		} else if (faceValue.equals("2")) {
 			return 2;

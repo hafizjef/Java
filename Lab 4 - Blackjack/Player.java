@@ -8,48 +8,43 @@ class Player{
 	private Date playDate = new Date();
 
 	private int cardNum = 0;
-	private int playerPos = 0;
-
-	static int playerCount = 0;
 	
 
 
 	public Player(String name){
 		this.name = name;
-		this.playerCount += 1;
-		this.playerPos = playerCount;
 	}
 
-	void setName(String name){
+	public void setName(String name){
 		this.name = name;
 	}
 
-	int getPlayerPos(){
-		return playerPos;
-	}
-
-	String getName(){
+	public String getName(){
 		return name;
 	}
 
-	void displayCardInHand(){
+	public void displayCardInHand(){
 		System.out.print("Cards in hand: ");
 		for(int count=0; count < 3; count++){
 			System.out.print(cardInHand[count] + " ");
 		}
+		System.out.println("\n\n");
 	}
 
-	void hit(Card card){
+	public void hit(Card card){
 		this.cardInHand[cardNum] = card;
-		totalPoint += card.getRealValue();
 		cardNum += 1;
 	}
+	
+	public void calculateTotalPoint(Card card){
+		totalPoint += card.getRealValue();
+	}
 
-	int getTotalPoint(){
+	public int getTotalPoint(){
 		return totalPoint;
 	}
 
-	void getPlayDate(){
+	public void getPlayDate(){
 		Date playDate = new Date();
 		System.out.println(playDate);
 	}
