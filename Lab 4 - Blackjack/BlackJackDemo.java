@@ -79,6 +79,8 @@ public class BlackJackDemo {
 
 		}
 
+
+		//Calculate winner
 		for (int index = 0; index < players.length; index++) {
 		
 			/* Eliminate players with more than 21 points */
