@@ -1,11 +1,11 @@
-import java.util.Date;
+import java.util.Calendar;
 
 class Player{
 
 	private String name;
 	private Card[] cardInHand = new Card[3];
 	private int totalPoint = 0;
-	private Date playDate = new Date();
+	private Calendar playDate = Calendar.getInstance();
 
 	private int cardNum = 0;
 	
@@ -44,8 +44,7 @@ class Player{
 		return totalPoint;
 	}
 
-	public void getPlayDate(){
-		Date playDate = new Date();
-		System.out.println(playDate);
+	public Calendar getplayDate(){
+		return playDate;
 	}
 }
