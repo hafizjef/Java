@@ -1,8 +1,8 @@
 /**
- * 
- * 
+ * This class demonstrate the Object Oriented Programming using many objects
+ * and class. This class acts as the game manager.
  * @author: Hafiz Jefri
- */
+ **/
 
 public class BlackJackDemo {
 
@@ -15,6 +15,7 @@ public class BlackJackDemo {
 		System.out.println("\n\n\tThis is to demo Black Jack game");
 		System.out.println("\t-------------------------------\n\n");
 		
+		// initialize new card
 		Card card1 = new Card('H', "2");
 		Card card2 = new Card('S', "9");
 		Card card3 = new Card('C', "3");
@@ -29,7 +30,7 @@ public class BlackJackDemo {
 		Player[] players = new Player[3];
 		Player p1 = new Player("Emma");
 
-		
+		//add card to player 1
 		p1.hit(card1);
 		p1.calculateTotalPoint(card1);
 		p1.hit(card2);
@@ -51,7 +52,7 @@ public class BlackJackDemo {
 		p2.hit(card6);
 		p2.calculateTotalPoint(card6);
 
-
+		// add card to player 3
 		p3.hit(card7);
 		p3.calculateTotalPoint(card7);
 		p3.hit(card8);
@@ -80,10 +81,10 @@ public class BlackJackDemo {
 		}
 
 
-		//Calculate winner
+		// Calculate winner
 		for (int index = 0; index < players.length; index++) {
 		
-			/* Eliminate players with more than 21 points */
+			// Eliminate players with more than 21 points
 			  
 			if (players[index].getTotalPoint() > 21) {
 				

@@ -1,36 +1,62 @@
-class Card{
+/**
+ * This class demonstrate card object for blackjack game. 
+ * This class act as the card properties
+ * @author: Hafiz Jefri
+ **/
+
+public class Card{
+
+	/* Class properties definition */
 	private char symbol;
 	private String faceValue;
 	private int realValue;
 
+	/**
+	* Default Card constructor
+	* @param symbol, faceValue
+	*/
 	public Card(char symbol, String faceValue){
 		this.symbol = symbol;
 		this.faceValue = faceValue;
 	}
 
-	@Override
-	public String toString(){
-		String card = faceValue + "-" + symbol;
-		return card;
-	}
-
-	void setSymbol(char symbol){
+	/**
+	* To set Card symbol
+	* @param symbol
+	*/
+	public void setSymbol(char symbol){
 		this.symbol = symbol;
 	}
-
-	char getSymbol(){
+	
+	/**
+	* To get Card symbol
+	* @return symbol
+	*/
+	public char getSymbol(){
 		return symbol;
 	}
 
-	void setFaceValue(String faceValue){
+	/**
+	* To set Card face value
+	* @param faceValue
+	*/
+	public void setFaceValue(String faceValue){
 		this.faceValue = faceValue;
 	}
-
-	String getFaceValue(){
+	
+	/**
+	* To get Card face value
+	* @return faceValue
+	*/
+	public String getFaceValue(){
 		return faceValue;
 	}
-
-	int getRealValue(){
+	
+	/**
+	* To get Card real value
+	* @return the card real value
+	*/
+	public int getRealValue(){
 		if (faceValue.equalsIgnoreCase("ace")) {
 			return 1;
 		} else if (faceValue.equalsIgnoreCase("jack")) {
