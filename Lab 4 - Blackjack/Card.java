@@ -108,7 +108,7 @@ public class Card extends Rectangle{
 		
 		System.out.print("\n+");
 		
-		for (int i = 0; i < getWidth(); i++){
+		for (int index = 0; index < getWidth(); index++){
 			System.out.print("-");
 		}
 			
@@ -116,24 +116,24 @@ public class Card extends Rectangle{
 		System.out.print("|");
 		System.out.print(getSymbol());
 		
-		for (int i = 0; i < (getWidth() - 1); i++){
+		for (int index = 0; index < (getWidth() - 1); index++){
 			System.out.print(" ");
 		}
 			
 		System.out.print("|");
 		System.out.println();
 
-		for (int i = 0; i < (getLength() - 2); i++) {
+		for (int index = 0; index < (getLength() - 2); index++) {
 			
 			System.out.print("|");
-			for (int i2 = 0; i2 < getWidth(); i2++){
+			for (int index2 = 0; index2 < getWidth(); index2++){
 				System.out.print(" ");
 			}
 			System.out.println("|");
 		}
 
 		System.out.print("|");
-		for (int i = 0; i < (getWidth() - 1); i++){
+		for (int index = 0; index < (getWidth() - 1); index++){
 			System.out.print(" ");
 		}
 			
@@ -150,7 +150,7 @@ public class Card extends Rectangle{
 		System.out.println();
 		System.out.print("+");
 		
-		for (int i = 0; i < getWidth(); i++){
+		for (int index = 0; index < getWidth(); index++){
 			System.out.print("-");
 		}
 		
