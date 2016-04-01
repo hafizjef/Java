@@ -12,8 +12,8 @@ public class BlackJackDemo {
 
 	public static void main (String[] args) {
 
-		System.out.println("\n\n\tThis is to demo Black Jack game");
-		System.out.println("\t-------------------------------\n\n");
+		System.out.println("\n\n\tThis is to demo Black Jack game that uses inheritance");
+		System.out.println("\t-----------------------------------------------------\n\n");
 		
 		// initialize new card
 		Card card1 = new Card('H', "2");
@@ -29,6 +29,7 @@ public class BlackJackDemo {
 		// 1st player initialization
 		Player[] players = new Player[3];
 		Player p1 = new Player("Emma");
+		p1.setLocation("Perak, Malaysia");
 
 		//add card to player 1
 		p1.hit(card1);
@@ -41,7 +42,10 @@ public class BlackJackDemo {
 	
 		// initialize more player
 		Player p2 = new Player("Ali");
+		p2.setLocation("Algiers, Denmark");
+
 		Player p3 = new Player("Abu");
+		p2.setLocation("Abu Dhabi, UAE");
 
 		
 		// add card to player 2 (Ali)
@@ -74,8 +78,8 @@ public class BlackJackDemo {
 
 			// Display details of player
 			System.out.print("Player " + (index + 1) + " : ");
-			System.out.print(currentPlayer.getName());
-			System.out.println("\t(Total Point : " + totalPoint + ")");
+			System.out.print(currentPlayer.getName() + " @ " + currentPlayer.getLocation());
+			System.out.println(" (Total Point : " + totalPoint + ")");
 			currentPlayer.displayCardInHand();
 
 		}
@@ -101,5 +105,8 @@ public class BlackJackDemo {
 			}
 		}
 
+		card4.draw();
+		card5.draw();
+		card6.draw();
 	}	
 }

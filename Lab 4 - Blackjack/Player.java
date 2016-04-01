@@ -6,7 +6,7 @@
 
 import java.util.Calendar;
 
-public class Player{
+public class Player extends Person{
 	
 	
 	/* Class properties definition */
@@ -23,6 +23,15 @@ public class Player{
 	* @param name
 	*/
 	public Player(String name){
+		this.name = name;
+	}
+
+	/**
+	* Overloaded constructor
+	* @param name, height, weight
+	*/
+	public Player(String name, double height, double weight){
+		super(height, weight);
 		this.name = name;
 	}
 

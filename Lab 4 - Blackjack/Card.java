@@ -4,7 +4,7 @@
  * @author: Hafiz Jefri
  **/
 
-public class Card{
+public class Card extends Rectangle{
 
 	/* Class properties definition */
 	private char symbol;
@@ -16,6 +16,16 @@ public class Card{
 	* @param symbol, faceValue
 	*/
 	public Card(char symbol, String faceValue){
+		this.symbol = symbol;
+		this.faceValue = faceValue;
+	}
+
+	/**
+	* Overloaded Card constructor
+	* @param symbol, faceValue, width, length
+	*/
+	public Card(char symbol, String faceValue, int width, int length){
+		super(width, length);
 		this.symbol = symbol;
 		this.faceValue = faceValue;
 	}
@@ -88,5 +98,62 @@ public class Card{
 		} else {
 			return 0;
 		}	
+	}
+
+	/**
+	* To draw cards
+	* 
+	*/
+	public void draw(){
+		
+		System.out.print("\n+");
+		
+		for (int i = 0; i < getWidth(); i++){
+			System.out.print("-");
+		}
+			
+		System.out.println("+");
+		System.out.print("|");
+		System.out.print(getSymbol());
+		
+		for (int i = 0; i < (getWidth() - 1); i++){
+			System.out.print(" ");
+		}
+			
+		System.out.print("|");
+		System.out.println();
+
+		for (int i = 0; i < (getLength() - 2); i++) {
+			
+			System.out.print("|");
+			for (int i2 = 0; i2 < getWidth(); i2++){
+				System.out.print(" ");
+			}
+			System.out.println("|");
+		}
+
+		System.out.print("|");
+		for (int i = 0; i < (getWidth() - 1); i++){
+			System.out.print(" ");
+		}
+			
+		if (faceValue.equalsIgnoreCase("King")){
+			System.out.print("K");
+		}else if (faceValue.equalsIgnoreCase("Queen")){
+			System.out.print("Q");
+		}else {
+			System.out.print(getFaceValue());
+		}
+			
+		
+		System.out.print("|");
+		System.out.println();
+		System.out.print("+");
+		
+		for (int i = 0; i < getWidth(); i++){
+			System.out.print("-");
+		}
+		
+		System.out.println("+");
 	}
 }
