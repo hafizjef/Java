@@ -8,6 +8,7 @@ package simplified.blackjack;
 
 import java.util.Calendar;
 import being.Person;
+import exception.blackjack.ValidatorException;
 
 public class Player extends Person{
 	
@@ -191,5 +192,31 @@ public void calculateAlphabet() {
 
 	public void displayAlphabetCounts() {
 		System.out.println("\tAlphabets Count : # Vowels - " + getNoOfVowel() + ", # Non-vowels - " + getNoOfNonVowel() + ", # Spaces - " + getNoOfSpace() + " and Length : " +lengthOfName());
+	}
+	
+	
+	/**
+	 * Validate Players name
+	 */
+	public void validatename() throws ValidatorException {
+		
+		boolean check = true;
+		
+		for(int index = 0; index<name.length(); index++) {
+			
+			if( (name.charAt(index) >= '0') && (name.charAt(index) <= '9')) {	
+				
+				check = false;	
+			}
+		}
+		
+		if(check) {
+			
+			//Player Name does not contain number
+			System.out.println(name + " is a valid name");
+		} else {
+
+			throw new ValidatorException(name);
+		}
 	}
 }
