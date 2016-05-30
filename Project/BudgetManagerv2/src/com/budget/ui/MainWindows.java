@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -20,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
@@ -30,6 +34,7 @@ import com.budget.core.Logger;
 
 @SuppressWarnings("serial")
 public class MainWindows extends JPanel implements PropertyChangeListener  {
+	
 	
 	Logger v = new Logger(true);
 	
@@ -79,7 +84,8 @@ public class MainWindows extends JPanel implements PropertyChangeListener  {
 		
 		
 		// Main Frame
-		frame = new JFrame("Budget Manager Pro v3.013 - BETA - Developers Preview");
+		frame = new JFrame("Budget Manager");
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindows.class.getResource("/images/favicon.png")));
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,10 +116,20 @@ public class MainWindows extends JPanel implements PropertyChangeListener  {
         panelCategory.setLayout(null);
         // End Section
         
+        
+        ItemListener itemListener = new ItemListener() {
+            public void itemStateChanged(ItemEvent itemEvent) {
+              int state = itemEvent.getStateChange();
+              System.out.println((state == ItemEvent.SELECTED) ? "Selected" : "Deselected");
+              System.out.println("Item: " + itemEvent.getItem());
+            }
+          };
+        
         comboBox = new JComboBox<String>();
         comboBox.setBounds(10, 124, 122, 20);
         panelBudget.add(comboBox);
-        comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"January", "February"}));
+        comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}));
+        comboBox.addItemListener(itemListener);
         
         
         // Section : Button
@@ -190,6 +206,7 @@ public class MainWindows extends JPanel implements PropertyChangeListener  {
         panelBudget.add(initialBal);
         initialBal.setValue(amount);
         initialBal.setColumns(10);
+        initialBal.addPropertyChangeListener("value", this);
         
         carBudgetField = new JFormattedTextField(amountFormat);
         carBudgetField.setColumns(10);
@@ -265,8 +282,29 @@ public class MainWindows extends JPanel implements PropertyChangeListener  {
         btnSave.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseClicked(MouseEvent arg0) {
-        		System.out.println(comboBox.getSelectedItem().toString() + " is " + initialBal.getText());
-        		DataService.initDB();
+        		//DataService.initDB();
+        		
+        		String category[] = new String[] {"Car", "Food", "Grocery", "Household", "Personal", "Entertainment", "Bill", "Rent", "Other"};
+        		String budgets[] = new String[9];
+        		
+        		
+        		budgets[0] = carBudgetField.getText();
+        		budgets[1] = foodBudgetField.getText();
+        		budgets[2] = groceryBudgetField.getText();
+        		budgets[3] = houseBudgetField.getText();
+        		budgets[4] = personalBudgetField.getText();
+        		budgets[5] = entertainmentBudgetField.getText();
+        		budgets[6] = billsBudgetField.getText();
+        		budgets[7] = rentsBudgetField.getText();
+        		budgets[8] = othersBudgetField.getText();
+        		
+        		//if (DataService.saveBudget(comboBox.getSelectedItem().toString(), budgets, category, initialBal.getText())) {
+        		//	JOptionPane.showMessageDialog(frame, "Budgets Updated!");
+        		//} else {
+        		//	JOptionPane.showMessageDialog(frame, "Error writing to database", "Error", JOptionPane.ERROR_MESSAGE);
+        		//}
+        		
+        		DataService.getBudgets(comboBox.getSelectedItem().toString());
         	}
         });
         
@@ -284,9 +322,6 @@ public class MainWindows extends JPanel implements PropertyChangeListener  {
         
         // End Section
         
-        
-        
-        initialBal.addPropertyChangeListener("value", this);
 	}
 	
 
