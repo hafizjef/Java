@@ -234,21 +234,66 @@ public class DataService {
 		}
 	}
 	
-	public static void getBudgets(String Month){
+	public static double[] getBudgets(String Month){
 		Connection conn = null;
+		double budgets[] = new double[9];
+		int index = 0;
+		
 		try {
 			conn = DriverManager.getConnection("jdbc:sqlite:budget.db");
 			
-			PreparedStatement stat = conn.prepareStatement("SELECT * FROM Category where month = ?");
+			PreparedStatement stat = conn.prepareStatement("SELECT allocatedBudget FROM Category where month = ?");
 			stat.setString(1, Month);
 			ResultSet rs = stat.executeQuery();
 			while (rs.next()){
-				v.Log(rs.getString("category"));
-				v.Log(rs.getString("allocatedBudget"));
+				v.Log("Budget " + index + " "  + rs.getDouble("allocatedBudget"));
+				budgets[index] = rs.getDouble("allocatedBudget");
+				index++;
 			}
+			
+			return budgets;
 			
 		} catch (SQLException err) {
 			v.Log("ERROR : " + err.getMessage());
+			return budgets;
+			
+		} finally {
+			try
+	          {
+	            if (conn != null) {
+	              conn.close();
+	            }
+	          } catch (SQLException err) {
+	        	  v.Log("ERROR : " + err.getMessage());
+	          }
+		}
+	}
+	
+	public static double getInitialBudget(String Month){
+		Connection conn = null;
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:sqlite:budget.db");
+			
+			PreparedStatement stat = conn.prepareStatement("SELECT amount FROM BudgetAccount where month = ?");
+			stat.setString(1, Month);
+			ResultSet rs = stat.executeQuery();
+			
+			return rs.getDouble(1);
+			
+		} catch (SQLException err) {
+			v.Log("ERROR : " + err.getMessage());
+			return 0;
+			
+		} finally {
+			try
+	          {
+	            if (conn != null) {
+	              conn.close();
+	            }
+	          } catch (SQLException err) {
+	        	  v.Log("ERROR : " + err.getMessage());
+	          }
 		}
 	}
 }

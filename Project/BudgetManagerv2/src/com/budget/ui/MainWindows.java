@@ -76,7 +76,20 @@ public class MainWindows extends JPanel implements PropertyChangeListener  {
 	
 	public MainWindows() throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		initialize();	
+		initialize();
+		
+		double value[] = DataService.getBudgets("January");
+    	int index = 0;
+		
+		Component[] comp = panelCategory.getComponents();
+		for (Component c : comp){
+			if (c instanceof JFormattedTextField){
+				((JFormattedTextField)c).setValue(value[index]);
+				index++;
+			}
+		}
+		
+		initialBal.setValue(DataService.getInitialBudget("January"));
 	}
 	
 	private void initialize() {
@@ -118,26 +131,41 @@ public class MainWindows extends JPanel implements PropertyChangeListener  {
         
         
         ItemListener itemListener = new ItemListener() {
-            public void itemStateChanged(ItemEvent itemEvent) {
-              int state = itemEvent.getStateChange();
-              System.out.println((state == ItemEvent.SELECTED) ? "Selected" : "Deselected");
-              System.out.println("Item: " + itemEvent.getItem());
+        	public void itemStateChanged(ItemEvent itemEvent) {
+        		
+        		double value[] = DataService.getBudgets(itemEvent.getItem().toString());
+            	int index = 0;
+        		
+        		Component[] comp = panelCategory.getComponents();
+        		for (Component c : comp){
+        			if (c instanceof JFormattedTextField){
+        				((JFormattedTextField)c).setValue(value[index]);
+        				index++;
+        			}
+        		}
+        		
+        		initialBal.setValue(DataService.getInitialBudget(itemEvent.getItem().toString()));
+        		
+            	//int state = itemEvent.getStateChange();
+            	//System.out.println((state == ItemEvent.SELECTED) ? "Selected" : "Deselected");
+            	//System.out.println("Item: " + itemEvent.getItem());
             }
-          };
+        };
         
         comboBox = new JComboBox<String>();
         comboBox.setBounds(10, 124, 122, 20);
         panelBudget.add(comboBox);
-        comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"}));
+        comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"January", "February", "March", "April", "May", "June", "July", "August", 
+        		"September", "October", "November", "December"}));
         comboBox.addItemListener(itemListener);
         
         
         // Section : Button
-        JButton btnSave = new JButton(ResourceBundle.getBundle("com.budget.ui.messages").getString("btnSave")); //$NON-NLS-1$ //$NON-NLS-2$
+        JButton btnSave = new JButton(ResourceBundle.getBundle("com.budget.ui.messages").getString("btnSave")); 
         btnSave.setBounds(10, 277, 89, 23);
         panelBudget.add(btnSave);
         
-        JButton btnClearAll = new JButton(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.btnNewButton.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JButton btnClearAll = new JButton(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.btnNewButton.text")); 
         panelCategory.add(btnClearAll);
         btnClearAll.setBounds(176, 266, 89, 23);
         // End Section
@@ -152,47 +180,47 @@ public class MainWindows extends JPanel implements PropertyChangeListener  {
         lblMonth.setBounds(10, 99, 46, 14);
         panelBudget.add(lblMonth);
         
-        JLabel lblCar = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblCar.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblCar = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblCar.text")); 
         lblCar.setBounds(10, 28, 46, 14);
         panelCategory.add(lblCar);
         
-        JLabel lblFoods = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblFoods.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblFoods = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblFoods.text")); 
         lblFoods.setBounds(10, 53, 46, 14);
         panelCategory.add(lblFoods);
         
-        JLabel lblGrocery = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblGrocery.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblGrocery = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblGrocery.text")); 
         lblGrocery.setBounds(10, 78, 48, 14);
         panelCategory.add(lblGrocery);
         
-        JLabel lblHousehold = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblHousehold.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblHousehold = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblHousehold.text")); 
         lblHousehold.setBounds(10, 103, 60, 14);
         panelCategory.add(lblHousehold);
         
-        JLabel lblPersonal = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblPersonal.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblPersonal = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblPersonal.text")); 
         lblPersonal.setBounds(10, 128, 51, 14);
         panelCategory.add(lblPersonal);
         
-        JLabel lblEntertainments = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblEntertainments.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblEntertainments = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblEntertainments.text")); 
         lblEntertainments.setBounds(10, 153, 83, 14);
         panelCategory.add(lblEntertainments);
         
-        JLabel lblBills = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblBills.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblBills = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblBills.text")); 
         lblBills.setBounds(10, 178, 46, 14);
         panelCategory.add(lblBills);
         
-        JLabel lblRents = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblRents.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblRents = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblRents.text")); 
         lblRents.setBounds(10, 203, 46, 14);
         panelCategory.add(lblRents);
         
-        JLabel lblOthers = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblOthers.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblOthers = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblOthers.text")); 
         lblOthers.setBounds(10, 228, 46, 14);
         panelCategory.add(lblOthers);
         
-        JLabel lblRemainingBudget = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblRemainingBudget.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        JLabel lblRemainingBudget = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.lblRemainingBudget.text"));
         lblRemainingBudget.setBounds(10, 11, 93, 14);
         panelBudget.add(lblRemainingBudget);
         
-        lblRemaining = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.label.text")); //$NON-NLS-1$ //$NON-NLS-2$
+        lblRemaining = new JLabel(ResourceBundle.getBundle("com.budget.ui.messages").getString("mainPane.label.text"));
         lblRemaining.setFont(new Font("Tahoma", Font.BOLD, 26));
         lblRemaining.setBounds(36, 36, 200, 52);
         panelBudget.add(lblRemaining);
@@ -288,23 +316,21 @@ public class MainWindows extends JPanel implements PropertyChangeListener  {
         		String budgets[] = new String[9];
         		
         		
-        		budgets[0] = carBudgetField.getText();
-        		budgets[1] = foodBudgetField.getText();
-        		budgets[2] = groceryBudgetField.getText();
-        		budgets[3] = houseBudgetField.getText();
-        		budgets[4] = personalBudgetField.getText();
-        		budgets[5] = entertainmentBudgetField.getText();
-        		budgets[6] = billsBudgetField.getText();
-        		budgets[7] = rentsBudgetField.getText();
-        		budgets[8] = othersBudgetField.getText();
+        		budgets[0] = carBudgetField.getValue().toString();
+        		budgets[1] = foodBudgetField.getValue().toString();
+        		budgets[2] = groceryBudgetField.getValue().toString();
+        		budgets[3] = houseBudgetField.getValue().toString();
+        		budgets[4] = personalBudgetField.getValue().toString();
+        		budgets[5] = entertainmentBudgetField.getValue().toString();
+        		budgets[6] = billsBudgetField.getValue().toString();
+        		budgets[7] = rentsBudgetField.getValue().toString();
+        		budgets[8] = othersBudgetField.getValue().toString();
         		
-        		//if (DataService.saveBudget(comboBox.getSelectedItem().toString(), budgets, category, initialBal.getText())) {
-        		//	JOptionPane.showMessageDialog(frame, "Budgets Updated!");
-        		//} else {
-        		//	JOptionPane.showMessageDialog(frame, "Error writing to database", "Error", JOptionPane.ERROR_MESSAGE);
-        		//}
-        		
-        		DataService.getBudgets(comboBox.getSelectedItem().toString());
+        		if (DataService.saveBudget(comboBox.getSelectedItem().toString(), budgets, category, initialBal.getValue().toString())) {
+        			JOptionPane.showMessageDialog(frame, "Budgets Updated!");
+        		} else {
+        			JOptionPane.showMessageDialog(frame, "Error writing to database", "Error", JOptionPane.ERROR_MESSAGE);
+        		}
         	}
         });
         
